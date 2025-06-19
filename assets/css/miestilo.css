@@ -1,0 +1,281 @@
+    *{margin: 0;
+    padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+
+
+.home-section {
+      position: relative;
+      min-height: 100vh;
+      background: url('../img/head.gif') no-repeat center center / cover !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Degradado superior */
+    .home-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 70%;
+      width: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+      z-index: 1;
+    }
+
+    /* Contenido sobre el fondo */
+    .content-container {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    /* Animación de texto */
+    .animated-text {
+      opacity: 0;
+      transform: translateZ(-100%);
+      animation: slideIn 5.5s forwards;
+    }
+
+    @keyframes slideIn {
+      to {
+        transform: translateZ(0);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 400px) {
+      .animated-text {
+        font-size: 1.5rem;
+      }
+
+      .content-container p {
+        font-size: 1rem;
+      }
+    }
+
+
+
+
+    
+ body 
+{
+  background-color: #ded8ca; /*color de fondo del body*/
+}
+
+
+
+/* Transición entre imágenes al hacer hover */
+.producto-imagen-hover {
+  transition: all 0.4s ease-in-out;
+}
+
+/* Este efecto se aplica con JS (ver abajo) */
+
+
+    .navbar{
+       background-color: rgb(60, 60, 58) !important;
+       
+    }
+
+    .a {
+      color: white;
+    }
+
+    .navbar-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .navbar-center img {
+      width: 150px;
+      margin-top: 25px;
+    }
+
+    .hero-section {
+      padding: 120px 0 100px; /* más espacio arriba */
+      margin-top: 40px; /* espacio desde el navbar */
+    }
+
+    .hero-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    font-family: 'Georgia', serif;
+    
+    }
+
+    .seccion-producto {
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .titulo-grande {
+      font-size: 4rem;
+      font-weight: 500;
+      margin-bottom: 60px;
+    }
+    .producto-imagen {
+      background-color: #f3f1ec;
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+    }
+    .producto-imagen img {
+      max-width: 70%;
+      max-height: 70%;
+    }
+    .producto-nombre {
+      font-size: 1.8rem;
+      color: #0b7a2f;
+      text-decoration: underline;
+      text-align: center;
+    }
+
+    .social-section {
+      padding: 60px 15px;
+      text-align: center;
+    }
+
+    .social-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    .social-img {
+      width: 50px;
+      max-width: 80px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-img:hover {
+      transform: scale(1.05);
+    }
+
+    .social-card {
+      padding: 15px;
+    }
+
+
+     
+    @media (min-width: 750px) {
+      .hero-section .col-md-6:first-child {
+        padding-right: 30px; /* separa imagen del texto */
+        margin-top: -65px;
+      }
+    
+      .hero-section .col-md-6:last-child {
+        padding-left: 40px;
+        margin-top: -65px;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+    
+      .navbar {
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+      }
+    
+      .navbar-brand {
+        font-size: 1.1rem; /* logo más chico */
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 0.95rem; /* ítems de menú más chicos */
+        padding: 0.4rem 0.8rem;
+      }
+    
+      .navbar-toggler {
+        padding: 0.25rem 0.5rem;
+        font-size: 1rem;
+      }
+
+    }
+
+    @media (min-width: 768px) {
+      .titulo-grande {
+        font-size: 4rem;
+      }
+
+      .producto-imagen {
+        width: 320px;
+        height: 320px;
+      }
+
+      .producto-nombre {
+        font-size: 1.8rem;
+      }
+    }
+
+    
+    .footer {
+      background-color: #000; /* Fondo negro */
+    }
+    
+    .footer-title {
+      font-family: Georgia, serif;
+      font-size: 24px;
+      margin-bottom: 0;
+      margin-top: 10px;
+    }
+
+    .Terminos-condiciones { 
+      color: #0b7a2f;
+      font-size: 17px;
+    }
+
+    .Comercializacion-link {
+    text-decoration: underline; /* Subrayado cuando pasa el mouse */
+    color: #0b7a2f;
+    font-size: 17px;
+    }
+
+    .footer-subtitle {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      font-family: Georgia, serif;
+    }
+    
+    .footer-text {
+      margin: 0;
+      font-size: 0.95rem;
+      font-family: Georgia, serif;
+    }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1; /* Hace que el contenido principal se expanda */
+  }
+
+  footer {
+    margin-top: auto; /* Empuja el footer hacia abajo */
+  }
+
+   
+    

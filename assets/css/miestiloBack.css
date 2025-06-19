@@ -1,0 +1,106 @@
+
+*{margin: 0;
+    padding: 0;
+    }
+
+.boton-registro {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 20px !important;
+}
+.body-venta{
+    background-color: #ded8ca;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.boton-registro button {
+  width: 200px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto al pasar el mouse */
+.boton-registro button:hover {
+  background-color: #218838; /* tono más oscuro de verde */
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.body-login {
+    background-color: #ded8ca;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card-login {
+    background-color:#cecbc2;
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-login {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group-login {
+    margin-bottom: 20px;
+}
+
+.form-control-login {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control-login:focus {
+    border-color: #36a824;
+    outline: none;
+}
+
+.boton-login {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #28970a;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #28970a;
+    transform: scale(1.03);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.link-registro {
+    color: #28970a;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-registro:hover {
+    text-decoration: underline;
+}
