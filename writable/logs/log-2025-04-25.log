@@ -1,0 +1,198 @@
+CRITICAL - 2025-04-25 17:59:26 --> ParseError: syntax error, unexpected token ")"
+[Method: GET, Route: /]
+in APPPATH\Config\Routing.php on line 87.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\proyecto_gg\\app\\Config\\Routing.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Config\\Routing')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Config\\Routing')
+ 4 SYSTEMPATH\Config\Factories.php(297): class_exists('Config\\Routing')
+ 5 SYSTEMPATH\Config\Factories.php(216): CodeIgniter\Config\Factories::locateClass([...], 'Config\\Routing')
+ 6 SYSTEMPATH\Config\Factories.php(159): CodeIgniter\Config\Factories::getDefinedInstance([...], 'Config\\Routing', [])
+ 7 SYSTEMPATH\Config\Factories.php(188): CodeIgniter\Config\Factories::__callStatic('config', [])
+ 8 SYSTEMPATH\Common.php(210): CodeIgniter\Config\Factories::get('config', 'Config\\Routing')
+ 9 SYSTEMPATH\Config\Services.php(622): config('Config\\Routing')
+10 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::routes(false)
+11 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('routes', [...])
+12 SYSTEMPATH\Config\Services.php(619): CodeIgniter\Config\BaseService::getSharedInstance('routes')
+13 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::routes()
+14 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('routes', [])
+15 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('routes')
+16 APPPATH\Config\Events.php(50): service('routes')
+17 SYSTEMPATH\Events\Events.php(155): CodeIgniter\Events\Events::Config\{closure}()
+18 SYSTEMPATH\CodeIgniter.php(339): CodeIgniter\Events\Events::trigger('pre_system')
+19 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+20 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+21 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 17:59:27 --> ParseError: syntax error, unexpected token ")"
+[Method: GET, Route: /]
+in APPPATH\Config\Routing.php on line 87.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\proyecto_gg\\app\\Config\\Routing.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Config\\Routing')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Config\\Routing')
+ 4 SYSTEMPATH\Config\Factories.php(297): class_exists('Config\\Routing')
+ 5 SYSTEMPATH\Config\Factories.php(216): CodeIgniter\Config\Factories::locateClass([...], 'Config\\Routing')
+ 6 SYSTEMPATH\Config\Factories.php(159): CodeIgniter\Config\Factories::getDefinedInstance([...], 'Config\\Routing', [])
+ 7 SYSTEMPATH\Config\Factories.php(188): CodeIgniter\Config\Factories::__callStatic('config', [])
+ 8 SYSTEMPATH\Common.php(210): CodeIgniter\Config\Factories::get('config', 'Config\\Routing')
+ 9 SYSTEMPATH\Config\Services.php(622): config('Config\\Routing')
+10 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::routes(false)
+11 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('routes', [...])
+12 SYSTEMPATH\Config\Services.php(619): CodeIgniter\Config\BaseService::getSharedInstance('routes')
+13 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::routes()
+14 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('routes', [])
+15 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('routes')
+16 APPPATH\Config\Events.php(50): service('routes')
+17 SYSTEMPATH\Events\Events.php(155): CodeIgniter\Events\Events::Config\{closure}()
+18 SYSTEMPATH\CodeIgniter.php(339): CodeIgniter\Events\Events::trigger('pre_system')
+19 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+20 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+21 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:00:44 --> ErrorException: Undefined variable $data
+[Method: GET, Route: /]
+in APPPATH\Controllers\Home.php on line 10.
+ 1 APPPATH\Controllers\Home.php(10): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\proyecto_gg\\app\\Controllers\\Home.php', 10)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:01:40 --> ErrorException: Undefined variable $titulo
+[Method: GET, Route: /]
+in APPPATH\Views\front\head_view.php on line 6.
+ 1 APPPATH\Views\front\head_view.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $titulo', 'C:\\xampp\\htdocs\\proyecto_gg\\app\\Views\\front\\head_view.php', 6)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\proyecto_gg\\app\\Views\\front\\head_view.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('front/head_view', [], true)
+ 5 APPPATH\Controllers\Home.php(10): view('front/head_view')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:02:59 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/Original.php"
+[Method: GET, Route: /]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/Original.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/Original', [], true)
+ 3 APPPATH\Controllers\Home.php(12): view('View/Original')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:20:36 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/front/acerca_de.php"
+[Method: GET, Route: acerca_de]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/front/acerca_de.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/front/acerca_de', [], true)
+ 3 APPPATH\Controllers\Home.php(30): view('View/front/acerca_de')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:25:13 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/front/acerca_de.php"
+[Method: GET, Route: acerca_de]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/front/acerca_de.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/front/acerca_de', [], true)
+ 3 APPPATH\Controllers\Home.php(30): view('View/front/acerca_de')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:25:14 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/front/acerca_de.php"
+[Method: GET, Route: acerca_de]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/front/acerca_de.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/front/acerca_de', [], true)
+ 3 APPPATH\Controllers\Home.php(30): view('View/front/acerca_de')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:25:16 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/front/acerca_de.php"
+[Method: GET, Route: acerca_de]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/front/acerca_de.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/front/acerca_de', [], true)
+ 3 APPPATH\Controllers\Home.php(30): view('View/front/acerca_de')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:25:16 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/front/acerca_de.php"
+[Method: GET, Route: acerca_de]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/front/acerca_de.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/front/acerca_de', [], true)
+ 3 APPPATH\Controllers\Home.php(30): view('View/front/acerca_de')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:25:16 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/front/acerca_de.php"
+[Method: GET, Route: acerca_de]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/front/acerca_de.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/front/acerca_de', [], true)
+ 3 APPPATH\Controllers\Home.php(30): view('View/front/acerca_de')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:25:31 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "View/front/acerca_de.php"
+[Method: GET, Route: acerca_de]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('View/front/acerca_de.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('View/front/acerca_de', [], true)
+ 3 APPPATH\Controllers\Home.php(30): view('View/front/acerca_de')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:27:15 --> ErrorException: include_once(nav.php): Failed to open stream: No such file or directory
+[Method: GET, Route: acerca_de]
+in APPPATH\Views\front\acerca_de.php on line 12.
+ 1 APPPATH\Views\front\acerca_de.php(12): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include_once(nav.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\proyecto_gg\\app\\Views\\front\\acerca_de.php', 12)
+ 2 APPPATH\Views\front\acerca_de.php(12): include_once()
+ 3 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\proyecto_gg\\app\\Views\\front\\acerca_de.php')
+ 4 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('front/acerca_de', [], true)
+ 6 APPPATH\Controllers\Home.php(30): view('front/acerca_de')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-25 18:27:41 --> ErrorException: include_once(nav.php): Failed to open stream: No such file or directory
+[Method: GET, Route: acerca_de]
+in APPPATH\Views\front\acerca_de.php on line 12.
+ 1 APPPATH\Views\front\acerca_de.php(12): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include_once(nav.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\proyecto_gg\\app\\Views\\front\\acerca_de.php', 12)
+ 2 APPPATH\Views\front\acerca_de.php(12): include_once()
+ 3 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\proyecto_gg\\app\\Views\\front\\acerca_de.php')
+ 4 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('front/acerca_de', [], true)
+ 6 APPPATH\Controllers\Home.php(30): view('front/acerca_de')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->acerca_de()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(57): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
