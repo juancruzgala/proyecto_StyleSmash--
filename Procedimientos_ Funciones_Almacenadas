@@ -1,0 +1,474 @@
+# Implementación de Procedimientos y Funciones Almacenadas en "TurnosYa"
+
+**Proyecto:** TurnosYa - Gestor de Alquiler de Canchas
+**Motor de Base de Datos:** SQL Server (T-SQL)
+**Tema:** Procedimientos y Funciones Almacenadas
+
+---
+
+## 1. Resumen y Marco Teórico
+
+El objetivo de este documento es detallar la implementación y el uso de Procedimientos Almacenados (Stored Procedures) y Funciones Almacenadas (Stored Functions) en SQL Server, aplicados al esquema de la base de datos "TurnosYa".
+
+### 1.1. Definiciones
+
+* **Procedimiento Almacenado (SP):** Es un conjunto de una o más declaraciones de Transact-SQL agrupadas como una unidad lógica y almacenadas en la base de datos. Estos son ideales para encapsular la lógica de negocio, como registrar una reserva o actualizar un estado. Se ejecutan usando el comando `EXEC`.
+
+* **Función Almacenada (SF):** Es similar a un SP, pero su propósito principal es realizar un cálculo y **obligatoriamente debe devolver un valor**. No están diseñadas para modificar datos (`INSERT`, `UPDATE`), sino para ser usadas dentro de otras consultas (ej. en un `SELECT` o `WHERE`).
+
+### 1.2. Ventajas para "TurnosYa"
+
+La adopción de esta estrategia en el proyecto "TurnosYa" ofrece beneficios cruciales:
+
+* **Seguridad (Prevención de Inyección SQL):** Al parametrizar las entradas (ej. `@id_jugador`), se evita que código malicioso sea ejecutado, ya que la entrada siempre se trata como un valor y no como parte del comando SQL.
+* **Mantenimiento y Reusabilidad:** Si la regla de negocio para crear una reserva cambia (ej. se añade un campo de seña), solo modificamos el `sp_RegistrarReserva` en un lugar, y toda la aplicación (web, móvil, etc.) que lo llame adoptará el cambio.
+* **Rendimiento:** Los SPs y Funciones se compilan y almacenan en el servidor. La primera vez que se ejecutan, SQL Server crea un plan de ejecución optimizado que se reutiliza, haciendo las consultas subsecuentes mucho más rápidas.
+* **Gestión de Permisos:** Podemos otorgar permisos a un rol (ej. 'Canchero') para `EJECUTAR` un procedimiento (`sp_ConfirmarPagoReserva`) sin necesidad de darle permisos directos de `UPDATE` sobre la tabla `reserva`.
+
+---
+
+## 2. Aplicación Práctica en "TurnosYa"
+
+A continuación, se presentan ejemplos de código T-SQL aplicados directamente al esquema de "TurnosYa".
+
+### 2.1. Función Escalar: `fn_VerificarDisponibilidad`
+
+Esta función es una herramienta de consulta esencial. Su propósito es responder una pregunta simple: "¿Está este turno (cancha, fecha, hora) disponible?".
+
+**Propósito:**
+* Recibe una cancha, fecha y hora.
+* Devuelve un `BIT`: `1` (true) si está disponible, `0` (false) si está ocupada.
+* Se usa para validar en la aplicación *antes* de intentar insertar una reserva.
+
+**Código T-SQL:**
+```sql
+CREATE FUNCTION fn_VerificarDisponibilidad (
+    @id_cancha INT,
+    @fecha DATE,
+    @hora TIME
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @disponible BIT = 1; -- Asumimos que está disponible
+
+    -- Verificamos si existe alguna reserva (Pendiente o Confirmada)
+    -- Asumimos que el ID de 'Cancelada' es 5 (según el lote de datos).
+    IF EXISTS (
+        SELECT 1
+        FROM reserva
+        WHERE id_cancha = @id_cancha
+          AND fecha = @fecha
+          AND hora = @hora
+          AND id_estado != 5 -- Excluimos las canceladas
+    )
+    BEGIN
+        SET @disponible = 0; -- Si existe, no está disponible
+    END
+
+    RETURN @disponible;
+END;
+GO
+
+##¡Perfecto! Preparar un archivo .md (Markdown) es una excelente idea para documentar esta parte de tu proyecto.
+
+Aquí tienes el contenido completo para tu archivo TurnosYa-Procedimientos.md. Puedes copiar y pegar todo el texto (incluyendo el formato) directamente en tu editor de Markdown.
+
+Markdown
+
+# Implementación de Procedimientos y Funciones Almacenadas en "TurnosYa"
+
+**Proyecto:** TurnosYa - Gestor de Alquiler de Canchas
+**Motor de Base de Datos:** SQL Server (T-SQL)
+**Tema:** Procedimientos y Funciones Almacenadas
+
+---
+
+## 1. Resumen y Marco Teórico
+
+El objetivo de este documento es detallar la implementación y el uso de Procedimientos Almacenados (Stored Procedures) y Funciones Almacenadas (Stored Functions) en SQL Server, aplicados al esquema de la base de datos "TurnosYa".
+
+### 1.1. Definiciones
+
+* **Procedimiento Almacenado (SP):** Es un conjunto de una o más declaraciones de Transact-SQL agrupadas como una unidad lógica y almacenadas en la base de datos. Estos son ideales para encapsular la lógica de negocio, como registrar una reserva o actualizar un estado. Se ejecutan usando el comando `EXEC`.
+
+* **Función Almacenada (SF):** Es similar a un SP, pero su propósito principal es realizar un cálculo y **obligatoriamente debe devolver un valor**. No están diseñadas para modificar datos (`INSERT`, `UPDATE`), sino para ser usadas dentro de otras consultas (ej. en un `SELECT` o `WHERE`).
+
+### 1.2. Ventajas para "TurnosYa"
+
+La adopción de esta estrategia en el proyecto "TurnosYa" ofrece beneficios cruciales:
+
+* **Seguridad (Prevención de Inyección SQL):** Al parametrizar las entradas (ej. `@id_jugador`), se evita que código malicioso sea ejecutado, ya que la entrada siempre se trata como un valor y no como parte del comando SQL.
+* **Mantenimiento y Reusabilidad:** Si la regla de negocio para crear una reserva cambia (ej. se añade un campo de seña), solo modificamos el `sp_RegistrarReserva` en un lugar, y toda la aplicación (web, móvil, etc.) que lo llame adoptará el cambio.
+* **Rendimiento:** Los SPs y Funciones se compilan y almacenan en el servidor. La primera vez que se ejecutan, SQL Server crea un plan de ejecución optimizado que se reutiliza, haciendo las consultas subsecuentes mucho más rápidas.
+* **Gestión de Permisos:** Podemos otorgar permisos a un rol (ej. 'Canchero') para `EJECUTAR` un procedimiento (`sp_ConfirmarPagoReserva`) sin necesidad de darle permisos directos de `UPDATE` sobre la tabla `reserva`.
+
+---
+
+## 2. Aplicación Práctica en "TurnosYa"
+
+A continuación, se presentan ejemplos de código T-SQL aplicados directamente al esquema de "TurnosYa".
+
+### 2.1. Función Escalar: `fn_VerificarDisponibilidad`
+
+Esta función es una herramienta de consulta esencial. Su propósito es responder una pregunta simple: "¿Está este turno (cancha, fecha, hora) disponible?".
+
+**Propósito:**
+* Recibe una cancha, fecha y hora.
+* Devuelve un `BIT`: `1` (true) si está disponible, `0` (false) si está ocupada.
+* Se usa para validar en la aplicación *antes* de intentar insertar una reserva.
+
+**Código T-SQL:**
+```sql
+CREATE FUNCTION fn_VerificarDisponibilidad (
+    @id_cancha INT,
+    @fecha DATE,
+    @hora TIME
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @disponible BIT = 1; -- Asumimos que está disponible
+
+    -- Verificamos si existe alguna reserva (Pendiente o Confirmada)
+    -- Asumimos que el ID de 'Cancelada' es 5 (según el lote de datos).
+    IF EXISTS (
+        SELECT 1
+        FROM reserva
+        WHERE id_cancha = @id_cancha
+          AND fecha = @fecha
+          AND hora = @hora
+          AND id_estado != 5 -- Excluimos las canceladas
+    )
+    BEGIN
+        SET @disponible = 0; -- Si existe, no está disponible
+    END
+
+    RETURN @disponible;
+END;
+GO
+2.2. Procedimiento de Lógica de Negocio: sp_RegistrarReserva
+Este es el procedimiento más crítico del sistema. Encapsula toda la lógica para crear una reserva de forma segura.
+
+Propósito:
+
+Es el único método que la aplicación debe usar para crear una reserva.
+
+Valida la disponibilidad usando la función fn_VerificarDisponibilidad.
+
+Valida la existencia del jugador.
+
+Inserta la reserva en estado "Pendiente".
+
+Maneja errores de forma controlada usando TRY...CATCH.
+
+Código T-SQL:
+
+CREATE PROCEDURE sp_RegistrarReserva
+    (
+    @id_jugador INT,
+    @id_cancha INT,
+    @fecha DATE,
+    @hora TIME,
+    @duracion VARCHAR(50) = '60 min' -- Valor por defecto
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Buscamos el ID del estado 'Pendiente' (Asumiendo ID 1)
+    DECLARE @id_estado_pendiente INT = 1; 
+
+    -- INICIO: Bloque TRY para manejo de errores
+    BEGIN TRY
+        
+        -- 1. Validación de Jugador: ¿Existe el jugador?
+        IF NOT EXISTS (SELECT 1 FROM jugador WHERE id_usuario_jugador = @id_jugador)
+        BEGIN
+            RAISERROR('El ID de jugador proporcionado no es válido.', 16, 1);
+            RETURN;
+        END
+
+        -- 2. Validación de Disponibilidad (usando nuestra función)
+        IF dbo.fn_VerificarDisponibilidad(@id_cancha, @fecha, @hora) = 0
+        BEGIN
+            RAISERROR('El turno para esa cancha, fecha y hora ya no está disponible.', 16, 1);
+            RETURN;
+        END
+
+        -- 3. Inserción
+        INSERT INTO reserva (fecha, hora, duracion, id_jugador, id_estado, id_cancha)
+        VALUES (@fecha, @hora, @duracion, @id_jugador, @id_estado_pendiente, @id_cancha);
+        
+        -- Devolvemos la reserva creada (útil para la app)
+        SELECT * FROM reserva 
+        WHERE id_reserva = SCOPE_IDENTITY(); 
+
+    END TRY
+    -- INICIO: Bloque CATCH para capturar errores
+    BEGIN CATCH
+        -- Capturamos el error de SQL Server y lo devolvemos
+        DECLARE @mensaje_error NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@mensaje_error, 16, 1);
+    END CATCH
+
+END;
+GO
+
+¡Perfecto! Preparar un archivo .md (Markdown) es una excelente idea para documentar esta parte de tu proyecto.
+
+Aquí tienes el contenido completo para tu archivo TurnosYa-Procedimientos.md. Puedes copiar y pegar todo el texto (incluyendo el formato) directamente en tu editor de Markdown.
+
+Markdown
+
+# Implementación de Procedimientos y Funciones Almacenadas en "TurnosYa"
+
+**Proyecto:** TurnosYa - Gestor de Alquiler de Canchas
+**Motor de Base de Datos:** SQL Server (T-SQL)
+**Tema:** Procedimientos y Funciones Almacenadas
+
+---
+
+## 1. Resumen y Marco Teórico
+
+El objetivo de este documento es detallar la implementación y el uso de Procedimientos Almacenados (Stored Procedures) y Funciones Almacenadas (Stored Functions) en SQL Server, aplicados al esquema de la base de datos "TurnosYa".
+
+### 1.1. Definiciones
+
+* **Procedimiento Almacenado (SP):** Es un conjunto de una o más declaraciones de Transact-SQL agrupadas como una unidad lógica y almacenadas en la base de datos. Estos son ideales para encapsular la lógica de negocio, como registrar una reserva o actualizar un estado. Se ejecutan usando el comando `EXEC`.
+
+* **Función Almacenada (SF):** Es similar a un SP, pero su propósito principal es realizar un cálculo y **obligatoriamente debe devolver un valor**. No están diseñadas para modificar datos (`INSERT`, `UPDATE`), sino para ser usadas dentro de otras consultas (ej. en un `SELECT` o `WHERE`).
+
+### 1.2. Ventajas para "TurnosYa"
+
+La adopción de esta estrategia en el proyecto "TurnosYa" ofrece beneficios cruciales:
+
+* **Seguridad (Prevención de Inyección SQL):** Al parametrizar las entradas (ej. `@id_jugador`), se evita que código malicioso sea ejecutado, ya que la entrada siempre se trata como un valor y no como parte del comando SQL.
+* **Mantenimiento y Reusabilidad:** Si la regla de negocio para crear una reserva cambia (ej. se añade un campo de seña), solo modificamos el `sp_RegistrarReserva` en un lugar, y toda la aplicación (web, móvil, etc.) que lo llame adoptará el cambio.
+* **Rendimiento:** Los SPs y Funciones se compilan y almacenan en el servidor. La primera vez que se ejecutan, SQL Server crea un plan de ejecución optimizado que se reutiliza, haciendo las consultas subsecuentes mucho más rápidas.
+* **Gestión de Permisos:** Podemos otorgar permisos a un rol (ej. 'Canchero') para `EJECUTAR` un procedimiento (`sp_ConfirmarPagoReserva`) sin necesidad de darle permisos directos de `UPDATE` sobre la tabla `reserva`.
+
+---
+
+## 2. Aplicación Práctica en "TurnosYa"
+
+A continuación, se presentan ejemplos de código T-SQL aplicados directamente al esquema de "TurnosYa".
+
+### 2.1. Función Escalar: `fn_VerificarDisponibilidad`
+
+Esta función es una herramienta de consulta esencial. Su propósito es responder una pregunta simple: "¿Está este turno (cancha, fecha, hora) disponible?".
+
+**Propósito:**
+* Recibe una cancha, fecha y hora.
+* Devuelve un `BIT`: `1` (true) si está disponible, `0` (false) si está ocupada.
+* Se usa para validar en la aplicación *antes* de intentar insertar una reserva.
+
+**Código T-SQL:**
+```sql
+CREATE FUNCTION fn_VerificarDisponibilidad (
+    @id_cancha INT,
+    @fecha DATE,
+    @hora TIME
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @disponible BIT = 1; -- Asumimos que está disponible
+
+    -- Verificamos si existe alguna reserva (Pendiente o Confirmada)
+    -- Asumimos que el ID de 'Cancelada' es 5 (según el lote de datos).
+    IF EXISTS (
+        SELECT 1
+        FROM reserva
+        WHERE id_cancha = @id_cancha
+          AND fecha = @fecha
+          AND hora = @hora
+          AND id_estado != 5 -- Excluimos las canceladas
+    )
+    BEGIN
+        SET @disponible = 0; -- Si existe, no está disponible
+    END
+
+    RETURN @disponible;
+END;
+GO
+2.2. Procedimiento de Lógica de Negocio: sp_RegistrarReserva
+Este es el procedimiento más crítico del sistema. Encapsula toda la lógica para crear una reserva de forma segura.
+
+Propósito:
+
+Es el único método que la aplicación debe usar para crear una reserva.
+
+Valida la disponibilidad usando la función fn_VerificarDisponibilidad.
+
+Valida la existencia del jugador.
+
+Inserta la reserva en estado "Pendiente".
+
+Maneja errores de forma controlada usando TRY...CATCH.
+
+Código T-SQL:
+
+SQL
+
+CREATE PROCEDURE sp_RegistrarReserva
+    (
+    @id_jugador INT,
+    @id_cancha INT,
+    @fecha DATE,
+    @hora TIME,
+    @duracion VARCHAR(50) = '60 min' -- Valor por defecto
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Buscamos el ID del estado 'Pendiente' (Asumiendo ID 1)
+    DECLARE @id_estado_pendiente INT = 1; 
+
+    -- INICIO: Bloque TRY para manejo de errores
+    BEGIN TRY
+        
+        -- 1. Validación de Jugador: ¿Existe el jugador?
+        IF NOT EXISTS (SELECT 1 FROM jugador WHERE id_usuario_jugador = @id_jugador)
+        BEGIN
+            RAISERROR('El ID de jugador proporcionado no es válido.', 16, 1);
+            RETURN;
+        END
+
+        -- 2. Validación de Disponibilidad (usando nuestra función)
+        IF dbo.fn_VerificarDisponibilidad(@id_cancha, @fecha, @hora) = 0
+        BEGIN
+            RAISERROR('El turno para esa cancha, fecha y hora ya no está disponible.', 16, 1);
+            RETURN;
+        END
+
+        -- 3. Inserción
+        INSERT INTO reserva (fecha, hora, duracion, id_jugador, id_estado, id_cancha)
+        VALUES (@fecha, @hora, @duracion, @id_jugador, @id_estado_pendiente, @id_cancha);
+        
+        -- Devolvemos la reserva creada (útil para la app)
+        SELECT * FROM reserva 
+        WHERE id_reserva = SCOPE_IDENTITY(); 
+
+    END TRY
+    -- INICIO: Bloque CATCH para capturar errores
+    BEGIN CATCH
+        -- Capturamos el error de SQL Server y lo devolvemos
+        DECLARE @mensaje_error NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@mensaje_error, 16, 1);
+    END CATCH
+
+END;
+GO
+2.3. Procedimiento Administrativo: sp_ConfirmarPagoReserva
+Este procedimiento es para uso interno (Administradores o Cancheros). Se encarga de actualizar el estado de una reserva pendiente a una confirmada, asociando el método de pago.
+
+Propósito:
+
+Permite al personal confirmar un pago.
+
+Valida que la reserva exista.
+
+Busca el id_estado correcto que coincida con el id_metodo_pago (ej. 'Confirmada (MP)').
+
+Actualiza el id_estado de la reserva.
+
+Código T-SQL:
+
+CREATE PROCEDURE sp_ConfirmarPagoReserva
+(
+    @id_reserva INT,
+    @id_metodo_pago INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @id_estado_nuevo INT;
+    
+    -- 1. Validar que la reserva exista
+    IF NOT EXISTS (SELECT 1 FROM reserva WHERE id_reserva = @id_reserva)
+    BEGIN
+        RAISERROR('La reserva con ID %d no existe.', 16, 1, @id_reserva);
+        RETURN;
+    END
+
+    -- 2. Encontrar el estado "Confirmada" que coincida con el método de pago
+    -- (Basado en el diseño del esquema donde estado y pago están relacionados)
+    SELECT @id_estado_nuevo = id_estado
+    FROM estado
+    WHERE id_pago = @id_metodo_pago AND estado LIKE 'Confirmada%';
+
+    IF @id_estado_nuevo IS NULL
+    BEGIN
+        RAISERROR('No se encontró un estado "Confirmada" para el método de pago ID %d.', 16, 1, @id_metodo_pago);
+        RETURN;
+    END
+
+    -- 3. Actualizar la reserva
+    UPDATE reserva
+    SET id_estado = @id_estado_nuevo
+    WHERE id_reserva = @id_reserva;
+
+    PRINT 'Reserva actualizada con éxito.';
+
+END;
+GO
+
+##3. Lote de Pruebas y Casos de Uso
+(Se asume que se ejecutó el lote de datos de prueba)
+
+###3.1. Prueba de Éxito: Reservar un turno libre
+El jugador 1 reserva la Cancha 1 (Fútbol 5) para el 2025-11-18 a las 19:00.
+
+EXEC sp_RegistrarReserva
+    @id_jugador = 1,
+    @id_cancha = 1,
+    @fecha = '2025-11-18',
+    @hora = '19:00:00';
+
+-- Resultado: Devuelve la fila de la nueva reserva creada con id_estado = 1 (Pendiente).
+
+###3.2. Prueba de Error: Conflicto de Horario (RAISERROR)
+El jugador 1 intenta reservar la Cancha 3 a las 18:00, que ya está ocupada por la reserva del lote de datos.
+
+EXEC sp_RegistrarReserva
+    @id_jugador = 1,
+    @id_cancha = 3,
+    @fecha = '2025-11-18',
+    @hora = '18:00:00';
+
+-- Resultado:
+-- (Error 50000, Nivel 16)
+-- El turno para esa cancha, fecha y hora ya no está disponible.
+
+###3.3. Prueba de Error: Jugador Inválido (RAISERROR)
+Se intenta reservar con un ID de jugador que no existe en la tabla jugador.
+
+EXEC sp_RegistrarReserva
+    @id_jugador = 99,
+    @id_cancha = 2,
+    @fecha = '2025-11-20',
+    @hora = '20:00:00';
+
+-- Resultado:
+-- (Error 50000, Nivel 16)
+-- El ID de jugador proporcionado no es válido.
+
+###3.4. Prueba de Actualización: Confirmar un pago
+Confirmamos la reserva (ID 1) del lote de datos, pagada con 'Transferencia MP' (ID de pago 2).
+
+-- Asumiendo que la reserva de prueba es id_reserva = 1
+EXEC sp_ConfirmarPagoReserva
+    @id_reserva = 1,
+    @id_metodo_pago = 2; -- 2 = Transferencia MP
+
+-- Resultado:
+-- Reserva actualizada con éxito.
+-- (La reserva 1 ahora tiene id_estado = 3 'Confirmada (MP)')
+
+##4. Conclusión
+La implementación de Procedimientos y Funciones Almacenadas en "TurnosYa" centraliza la lógica de negocio, 
+protege la base de datos de errores e inyecciones de SQL, y optimiza el rendimiento general. 
+Esta capa de abstracción es fundamental para que el sistema sea escalable y fácil de mantener a largo plazo.
